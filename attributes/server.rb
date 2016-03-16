@@ -25,3 +25,12 @@ default['zabbix']['server']['externalscriptspath'] = '/usr/local/scripts/zabbix/
 default['zabbix']['server']['timeout'] = '3'
 default['zabbix']['server']['value_cache_size'] = '8M' # default 8MB
 default['zabbix']['server']['cache_size'] = '8M' # default 8MB
+
+
+
+
+default['zabbix']['server']['httpd_dir']      =   "/etc/httpd/conf.d"
+
+default['zabbix']['server']['pid_file']       =   "/var/run/zabbix/zabbix_server.pid"
+
+default['zabbix']['server']['time_zone']      =   "Europe/London"
