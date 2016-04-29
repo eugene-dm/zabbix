@@ -32,6 +32,8 @@ template "#{node['zabbix']['etc_dir']}/zabbix_server.conf" do
   )
 end
 
+directory node['zabbix']['install_dir']
+
 service 'zabbix-server' do
   supports :status => true, :start => true, :stop => true, :restart => true
   action [:start, :enable]
