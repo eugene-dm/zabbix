@@ -114,18 +114,30 @@ def create_new_database
   zabbix_path = ::File.join(new_resource.source_dir, "zabbix-#{new_resource.server_version}")
   sql_scripts = if new_resource.server_version.to_f < 2.0
                   Chef::Log.info 'Version 1.x branch of zabbix in use'
-                  [
-                    ['zabbix_populate_schema', ::File.join(zabbix_path, 'create', 'schema', 'postgresql.sql')],
-                    ['zabbix_populate_data', ::File.join(zabbix_path, 'create', 'data', 'data.sql')],
-                    ['zabbix_populate_image', ::File.join(zabbix_path, 'create', 'data', 'images_pgsql.sql')],
-                  ]
+                  if node['zabbix']['role'] == 'proxy'
+                    [
+                      ['zabbix_populate_schema', ::File.join(zabbix_path, 'create', 'schema', 'postgresql.sql')],
+                    ]
+                  else
+                    [
+                      ['zabbix_populate_schema', ::File.join(zabbix_path, 'create', 'schema', 'postgresql.sql')],
+                      ['zabbix_populate_data', ::File.join(zabbix_path, 'create', 'data', 'data.sql')],
+                      ['zabbix_populate_image', ::File.join(zabbix_path, 'create', 'data', 'images_pgsql.sql')],
+                    ]
+                  end
                 else
                   Chef::Log.info 'Version 2.x branch of zabbix in use'
-                  [
-                    ['zabbix_populate_schema', ::File.join(zabbix_path, 'database', 'postgresql', 'schema.sql')],
-                    ['zabbix_populate_data', ::File.join(zabbix_path, 'database', 'postgresql', 'data.sql')],
-                    ['zabbix_populate_image', ::File.join(zabbix_path, 'database', 'postgresql', 'images.sql')],
-                  ]
+                  if node['zabbix']['role'] == 'proxy'
+                    [
+                      ['zabbix_populate_schema', ::File.join(zabbix_path, 'database', 'postgresql', 'schema.sql')],
+                    ]
+                  else
+                    [
+                      ['zabbix_populate_schema', ::File.join(zabbix_path, 'database', 'postgresql', 'schema.sql')],
+                      ['zabbix_populate_data', ::File.join(zabbix_path, 'database', 'postgresql', 'data.sql')],
+                      ['zabbix_populate_image', ::File.join(zabbix_path, 'database', 'postgresql', 'images.sql')],
+                    ]
+                  end
                 end
 
   sql_scripts.each do |script_spec|

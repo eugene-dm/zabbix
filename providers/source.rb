@@ -52,6 +52,24 @@ action :install_server do
   end
 end
 
+action :install_proxy do
+  action_extract_only
+
+  source_dir = extract_dir(new_resource.code_dir, new_resource.target_dir)
+  unless ::File.exist?(::File.join(source_dir, 'proxy_already_built'))
+    Chef::Log.info("Compiling Zabbix Proxy with options '#{new_resource.configure_options}")
+    script "install_zabbix_proxy_#{zabbix_source_identifier(new_resource.branch, new_resource.version)}" do
+      interpreter 'bash'
+      user 'root'
+      code <<-EOH
+        (cd #{source_dir} && ./configure --enable-proxy --prefix=#{new_resource.install_dir} #{new_resource.configure_options})
+        (cd #{source_dir} && make install && touch proxy_already_built)
+      EOH
+    end
+    new_resource.updated_by_last_action(true)
+  end
+end
+
 action :install_agent do
   action_extract_only
 

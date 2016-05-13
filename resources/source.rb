@@ -1,4 +1,4 @@
-actions :extract_only, :install_server, :install_agent
+actions :extract_only, :install_server, :install_proxy, :install_agent
 default_action :extract_only
 
 attribute :source_url, :kind_of => String, :required => true

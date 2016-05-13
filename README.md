@@ -302,6 +302,7 @@ Fetchs the Zabbix source tar and does something with it
 #### Actions
 * `extract_only` (Default Action) - Just fetch and extract the tar
 * `install_server` - Fetch the tar then compile the source as a Server
+* `install_proxy_server` - Fetch the tar then compile the source as a Proxy
 * `install_agent` - Fetch the tar then compile the source as an Agent
 
 #### Attributes
