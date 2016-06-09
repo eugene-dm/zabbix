@@ -28,4 +28,3 @@ default['zabbix']['uid']    = nil
 default['zabbix']['gid']    = nil
 default['zabbix']['home']   = '/opt/zabbix'
 default['zabbix']['shell']  = '/bin/bash'
-default['platform_version_int'] = node['platform_version'].to_i

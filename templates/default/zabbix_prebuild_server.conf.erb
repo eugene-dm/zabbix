@@ -27,7 +27,7 @@ SNMPTrapperFile=/var/log/snmptrap/snmptrap.log
 # Default:
 # Timeout=3
 
-Timeout=4
+Timeout=<%= node['zabbix']['server']['timeout']%>
 
 ### Option: AlertScriptsPath
 #	Full path to location of custom alert scripts.
@@ -37,7 +37,7 @@ Timeout=4
 # Default:
 # AlertScriptsPath=${datadir}/zabbix/alertscripts
 
-AlertScriptsPath=/usr/lib/zabbix/alertscripts
+AlertScriptsPath=<%= node['zabbix']['alert_dir'] %>
 
 ### Option: ExternalScripts
 #	Full path to location of external scripts.
@@ -47,7 +47,7 @@ AlertScriptsPath=/usr/lib/zabbix/alertscripts
 # Default:
 # ExternalScripts=${datadir}/zabbix/externalscripts
 
-ExternalScripts=/usr/lib/zabbix/externalscripts
+ExternalScripts=<%= node['zabbix']['server']['externalscriptspath'] %>
 
 ### Option: LogSlowQueries
 #	How long a database query may take before being logged (in milliseconds).
@@ -60,5 +60,16 @@ ExternalScripts=/usr/lib/zabbix/externalscripts
 # LogSlowQueries=0
 
 LogSlowQueries=3000
+
+ValueCacheSize=<%= node['zabbix']['server']['value_cache_size'] %>
+CacheSize=<%= node['zabbix']['server']['cache_size'] %>
+
+JavaGateway=<%= @java_gateway %>
+JavaGatewayPort=<%= @java_gateway_port %>
+StartJavaPollers=<%= @java_pollers %>
+StartPollers=<%= node['zabbix']['server']['start_pollers']%>
+Include=<%= node['zabbix']['server']['include_dir'] %>
+DebugLevel=<%= node['zabbix']['server']['log_level'] %>
+
 
 

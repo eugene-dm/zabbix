@@ -82,8 +82,8 @@ def create_new_database
   mysql_database new_resource.dbname do
     connection root_connection
     notifies :run, 'execute[zabbix_populate_schema]', :immediately
-    notifies :run, 'execute[zabbix_populate_image]', :immediately unless node['zabbix']['role'] == 'proxy'
-    notifies :run, 'execute[zabbix_populate_data]', :immediately unless node['zabbix']['role'] == 'proxy'
+    notifies :run, 'execute[zabbix_populate_image]', :immediately
+    notifies :run, 'execute[zabbix_populate_data]', :immediately
     notifies :create, "mysql_database_user[#{new_resource.username}]", :immediately
     notifies :grant, "mysql_database_user[#{new_resource.username}]", :immediately
     notifies :create, 'ruby_block[set_updated]', :immediately
@@ -101,30 +101,18 @@ def create_new_database
   zabbix_path = ::File.join(new_resource.source_dir, "zabbix-#{new_resource.server_version}")
   sql_scripts = if new_resource.server_version.to_f < 2.0
                   Chef::Log.info 'Version 1.x branch of zabbix in use'
-                  if node['zabbix']['role'] == 'proxy'
-                    [
-                      ['zabbix_populate_schema', ::File.join(zabbix_path, 'create', 'schema', 'mysql.sql')],
-                    ]
-                  else
-                    [
-                      ['zabbix_populate_schema', ::File.join(zabbix_path, 'create', 'schema', 'mysql.sql')],
-                      ['zabbix_populate_data', ::File.join(zabbix_path, 'create', 'data', 'data.sql')],
-                      ['zabbix_populate_image', ::File.join(zabbix_path, 'create', 'data', 'images_mysql.sql')],
-                    ]
-                  end
+                  [
+                    ['zabbix_populate_schema', ::File.join(zabbix_path, 'create', 'schema', 'mysql.sql')],
+                    ['zabbix_populate_data', ::File.join(zabbix_path, 'create', 'data', 'data.sql')],
+                    ['zabbix_populate_image', ::File.join(zabbix_path, 'create', 'data', 'images_mysql.sql')],
+                  ]
                 else
                   Chef::Log.info 'Version 2.x branch of zabbix in use'
-                  if node['zabbix']['role'] == 'proxy'
-                    [
-                      ['zabbix_populate_schema', ::File.join(zabbix_path, 'database', 'mysql', 'schema.sql')],
-                    ]
-                  else
-                    [
-                      ['zabbix_populate_schema', ::File.join(zabbix_path, 'database', 'mysql', 'schema.sql')],
-                      ['zabbix_populate_data', ::File.join(zabbix_path, 'database', 'mysql', 'data.sql')],
-                      ['zabbix_populate_image', ::File.join(zabbix_path, 'database', 'mysql', 'images.sql')],
-                    ]
-                  end
+                  [
+                    ['zabbix_populate_schema', ::File.join(zabbix_path, 'database', 'mysql', 'schema.sql')],
+                    ['zabbix_populate_data', ::File.join(zabbix_path, 'database', 'mysql', 'data.sql')],
+                    ['zabbix_populate_image', ::File.join(zabbix_path, 'database', 'mysql', 'images.sql')],
+                  ]
                 end
 
   sql_scripts.each do |script_spec|
