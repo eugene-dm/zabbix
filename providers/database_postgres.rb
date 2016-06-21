@@ -13,11 +13,11 @@ def load_current_resource
   @current_resource.root_password(@new_resource.root_password)
 
   @current_resource.exists = true if database_exists?(
-    @current_resource.dbname,
-    @current_resource.host,
-    @current_resource.port,
-    @current_resource.root_username,
-    @current_resource.root_password)
+      @current_resource.dbname,
+      @current_resource.host,
+      @current_resource.port,
+      @current_resource.root_username,
+      @current_resource.root_password)
 end
 
 def database_exists?(dbname, host, port, root_username, root_password)
@@ -57,10 +57,10 @@ def create_new_database
   #     :password => new_resource.password
   #   }
   root_connection = {
-    :host => new_resource.host,
-    :port => new_resource.port,
-    :username => new_resource.root_username,
-    :password => new_resource.root_password
+      :host => new_resource.host,
+      :port => new_resource.port,
+      :username => new_resource.root_username,
+      :password => new_resource.root_password
   }
 
   zabbix_source 'extract_zabbix_database' do
@@ -114,18 +114,30 @@ def create_new_database
   zabbix_path = ::File.join(new_resource.source_dir, "zabbix-#{new_resource.server_version}")
   sql_scripts = if new_resource.server_version.to_f < 2.0
                   Chef::Log.info 'Version 1.x branch of zabbix in use'
-                  [
-                    ['zabbix_populate_schema', ::File.join(zabbix_path, 'create', 'schema', 'postgresql.sql')],
-                    ['zabbix_populate_data', ::File.join(zabbix_path, 'create', 'data', 'data.sql')],
-                    ['zabbix_populate_image', ::File.join(zabbix_path, 'create', 'data', 'images_pgsql.sql')],
-                  ]
+                  if node['zabbix']['role'] == 'proxy'
+                    [
+                        ['zabbix_populate_schema', ::File.join(zabbix_path, 'create', 'schema', 'postgresql.sql')],
+                    ]
+                  else
+                    [
+                        ['zabbix_populate_schema', ::File.join(zabbix_path, 'create', 'schema', 'postgresql.sql')],
+                        ['zabbix_populate_data', ::File.join(zabbix_path, 'create', 'data', 'data.sql')],
+                        ['zabbix_populate_image', ::File.join(zabbix_path, 'create', 'data', 'images_pgsql.sql')],
+                    ]
+                  end
                 else
                   Chef::Log.info 'Version 2.x branch of zabbix in use'
-                  [
-                    ['zabbix_populate_schema', ::File.join(zabbix_path, 'database', 'postgresql', 'schema.sql')],
-                    ['zabbix_populate_data', ::File.join(zabbix_path, 'database', 'postgresql', 'data.sql')],
-                    ['zabbix_populate_image', ::File.join(zabbix_path, 'database', 'postgresql', 'images.sql')],
-                  ]
+                  if node['zabbix']['role'] == 'proxy'
+                    [
+                        ['zabbix_populate_schema', ::File.join(zabbix_path, 'database', 'postgresql', 'schema.sql')],
+                    ]
+                  else
+                    [
+                        ['zabbix_populate_schema', ::File.join(zabbix_path, 'database', 'postgresql', 'schema.sql')],
+                        ['zabbix_populate_data', ::File.join(zabbix_path, 'database', 'postgresql', 'data.sql')],
+                        ['zabbix_populate_image', ::File.join(zabbix_path, 'database', 'postgresql', 'images.sql')],
+                    ]
+                  end
                 end
 
   sql_scripts.each do |script_spec|
