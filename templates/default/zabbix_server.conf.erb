@@ -2,9 +2,11 @@
 
 ############ GENERAL PARAMETERS #################
 
-<% if node['zabbix']['server']['log_file'] -%>
-LogFile=<%= node['zabbix']['server']['log_file'] %>
-<% end -%>
+LogFile=<%= node['zabbix']['server']['log_file']  %>
+
+LogFileSize=0
+
+PidFile=<%= node['zabbix']['server']['pid_file'] %>
 
 DBHost=<%= @dbhost %>
 DBName=<%= @dbname %>
@@ -12,20 +14,68 @@ DBUser=<%= @dbuser %>
 DBPassword=<%= @dbpassword %>
 DBPort=<%= @dbport %>
 
-DebugLevel=<%= node['zabbix']['server']['log_level'] %>
-PidFile=<%= node['zabbix']['run_dir'] %>/zabbix_server.pid
-Include=<%= node['zabbix']['server']['include_dir'] %>
+
+############ ADVANCED PARAMETERS ################
+
+SNMPTrapperFile=/var/log/snmptrap/snmptrap.log
+
+### Option: Timeout
+#	Specifies how long we wait for agent, SNMP device or external check (in seconds).
+#
+# Mandatory: no
+# Range: 1-30
+# Default:
+# Timeout=3
+
+Timeout=<%= node['zabbix']['server']['timeout']%>
+
+### Option: AlertScriptsPath
+#	Full path to location of custom alert scripts.
+#	Default depends on compilation options.
+#
+# Mandatory: no
+# Default:
+# AlertScriptsPath=${datadir}/zabbix/alertscripts
+
 AlertScriptsPath=<%= node['zabbix']['alert_dir'] %>
 
-HousekeepingFrequency=<%= node['zabbix']['server']['housekeeping_frequency']%>
-MaxHousekeeperDelete=<%= node['zabbix']['server']['max_housekeeper_delete'] %>
+### Option: ExternalScripts
+#	Full path to location of external scripts.
+#	Default depends on compilation options.
+#
+# Mandatory: no
+# Default:
+# ExternalScripts=${datadir}/zabbix/externalscripts
+
+ExternalScripts=<%= node['zabbix']['server']['externalscriptspath'] %>
+
+### Option: LogSlowQueries
+#	How long a database query may take before being logged (in milliseconds).
+#	Only works if DebugLevel set to 3, 4 or 5.
+#	0 - don't log slow queries.
+#
+# Mandatory: no
+# Range: 1-3600000
+# Default:
+# LogSlowQueries=0
+
+LogSlowQueries=3000
+
+ValueCacheSize=<%= node['zabbix']['server']['value_cache_size'] %>
+CacheSize=<%= node['zabbix']['server']['cache_size'] %>
 
 JavaGateway=<%= @java_gateway %>
 JavaGatewayPort=<%= @java_gateway_port %>
 StartJavaPollers=<%= @java_pollers %>
-StartPollers=<%= node['zabbix']['server']['start_pollers']%>
 
-ExternalScripts=<%= node['zabbix']['server']['externalscriptspath'] %>
-Timeout=<%= node['zabbix']['server']['timeout']%>
-ValueCacheSize=<%= node['zabbix']['server']['value_cache_size'] %>
-CacheSize=<%= node['zabbix']['server']['cache_size'] %>
+StartPollers=<%= node['zabbix']['server']['start_pollers']%>
+StartPollersUnreachable=<%= node['zabbix']['server']['StartPollersUnreachable']%>
+Include=<%= node['zabbix']['server']['include_dir'] %>
+DebugLevel=<%= node['zabbix']['server']['log_level'] %>
+
+HousekeepingFrequency=<%= node['zabbix']['server']['housekeeping_frequency']%>
+MaxHousekeeperDelete=<%= node['zabbix']['server']['max_housekeeper_delete'] %>
+
+<% node['zabbix']['server']['additional_parameters'].each do |key, value| -%>
+<%= key %>=<%= value %>
+<% end -%>

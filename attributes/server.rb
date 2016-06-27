@@ -34,3 +34,5 @@ default['zabbix']['server']['httpd_dir']      =   "/etc/httpd/conf.d"
 default['zabbix']['server']['pid_file']       =   "/var/run/zabbix/zabbix_server.pid"
 
 default['zabbix']['server']['time_zone']      =   "Europe/London"
+
+default['zabbix']['server']['additional_parameters'] = {}
