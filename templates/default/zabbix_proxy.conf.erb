@@ -22,7 +22,7 @@
 # Default:
 # Server=
 
-Server=<%= node['zabbix']['agent']['servers'].join(',') %>
+Server=<%= node['zabbix']['proxy']['servers'].join(',') %>
 
 ### Option: ServerPort
 #	Port of Zabbix trapper on Zabbix server.
