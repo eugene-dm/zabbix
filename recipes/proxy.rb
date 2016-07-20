@@ -21,5 +21,8 @@ template "#{node['zabbix']['etc_dir']}/zabbix_proxy.conf" do
     :dbuser             => node['zabbix']['database']['dbuser'],
     :dbpassword         => node['zabbix']['database']['dbpassword'],
     :dbport             => node['zabbix']['database']['dbport'],
+    :java_gateway       => node['zabbix']['server']['java_gateway'],
+    :java_gateway_port  => node['zabbix']['server']['java_gateway_port'],
+    :java_pollers       => node['zabbix']['server']['java_pollers']
   )
 end
