@@ -22,7 +22,7 @@
 # Default:
 # Server=
 
-Server=<%= node['zabbix']['proxy']['servers'].join(',') %>
+Server=<%= node['zabbix']['agent']['servers'].join(',') %>
 
 ### Option: ServerPort
 #	Port of Zabbix trapper on Zabbix server.
@@ -245,6 +245,7 @@ ConfigFrequency=<%= node['zabbix']['proxy']['config']['ConfigFrequency'] %>
 # Range: 0-1000
 # Default:
 # StartTrappers=5
+StartTrappers=<%= @start_trappers %>
 
 ### Option: StartPingers
 #	Number of pre-forked instances of ICMP pingers.
@@ -253,6 +254,7 @@ ConfigFrequency=<%= node['zabbix']['proxy']['config']['ConfigFrequency'] %>
 # Range: 0-1000
 # Default:
 # StartPingers=1
+StartPingers=<%= @start_pingers %>
 
 ### Option: StartDiscoverers
 #	Number of pre-forked instances of discoverers.
@@ -288,6 +290,8 @@ ConfigFrequency=<%= node['zabbix']['proxy']['config']['ConfigFrequency'] %>
 # Default:
 # CacheSize=8M
 
+CacheSize=<%= node['zabbix']['proxy']['cache_size'] %>
+
 ### Option: StartDBSyncers
 #	Number of pre-forked instances of DB Syncers
 #
@@ -321,6 +325,8 @@ ConfigFrequency=<%= node['zabbix']['proxy']['config']['ConfigFrequency'] %>
 # Range: 1-30
 # Default:
 # Timeout=3
+
+Timeout=<%= node['zabbix']['proxy']['timeout']%>
 
 ### Option: TrapperTimeout
 #	Specifies how many seconds trapper may spend processing new data.
@@ -401,11 +407,6 @@ ConfigFrequency=<%= node['zabbix']['proxy']['config']['ConfigFrequency'] %>
 # Mandatory: no
 # Default:
 # TmpDir=/tmp
-
-
-JavaGateway=<%= @java_gateway %>
-JavaGatewayPort=<%= @java_gateway_port %>
-StartJavaPollers=<%= @java_pollers %>
 
 ### Option: Include
 #	You may include individual files or all files in a directory in the configuration file.

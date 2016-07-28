@@ -139,7 +139,9 @@ template "#{node['zabbix']['etc_dir']}/zabbix_proxy.conf" do
     :dbport => node['zabbix']['database']['dbport'],
     :java_gateway => node['zabbix']['server']['java_gateway'],
     :java_gateway_port => node['zabbix']['server']['java_gateway_port'],
-    :java_pollers => node['zabbix']['server']['java_pollers']
+    :java_pollers => node['zabbix']['server']['java_pollers'],
+    :start_trappers => node['zabbix']['proxy']['start_trappers'],
+    :start_pingers => node['zabbix']['proxy']['start_pingers']
   )
   notifies :restart, 'service[zabbix_proxy]', :delayed
 end

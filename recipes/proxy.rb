@@ -16,13 +16,15 @@ include_recipe 'zabbix::database'
 
 template "#{node['zabbix']['etc_dir']}/zabbix_proxy.conf" do
   variables(
-    :dbhost             => node['zabbix']['database']['dbhost'] ,
-    :dbname             => node['zabbix']['database']['dbname'],
-    :dbuser             => node['zabbix']['database']['dbuser'],
-    :dbpassword         => node['zabbix']['database']['dbpassword'],
-    :dbport             => node['zabbix']['database']['dbport'],
-    :java_gateway       => node['zabbix']['server']['java_gateway'],
-    :java_gateway_port  => node['zabbix']['server']['java_gateway_port'],
-    :java_pollers       => node['zabbix']['server']['java_pollers']
+      :dbhost => node['zabbix']['database']['dbhost'],
+      :dbname => node['zabbix']['database']['dbname'],
+      :dbuser => node['zabbix']['database']['dbuser'],
+      :dbpassword => node['zabbix']['database']['dbpassword'],
+      :dbport => node['zabbix']['database']['dbport'],
+      :java_gateway => node['zabbix']['server']['java_gateway'],
+      :java_gateway_port => node['zabbix']['server']['java_gateway_port'],
+      :java_pollers => node['zabbix']['server']['java_pollers'],
+      :start_trappers => node['zabbix']['proxy']['start_trappers'],
+      :start_pingers => node['zabbix']['proxy']['start_pingers']
   )
 end
