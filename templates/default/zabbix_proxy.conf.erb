@@ -22,7 +22,7 @@
 # Default:
 # Server=
 
-Server=<%= node['zabbix']['agent']['servers'].join(',') %>
+Server=<%= node['zabbix']['proxy']['servers'].join(',') %>
 
 ### Option: ServerPort
 #	Port of Zabbix trapper on Zabbix server.
@@ -414,6 +414,10 @@ Timeout=<%= node['zabbix']['proxy']['timeout']%>
 # Mandatory: no
 # Default:
 # Include=
+
+JavaGateway=<%= @java_gateway %>
+JavaGatewayPort=<%= @java_gateway_port %>
+StartJavaPollers=<%= @java_pollers %>
 
 # Include=/etc/zabbix/zabbix_proxy.general.conf
 # Include=/etc/zabbix/zabbix_proxy/
