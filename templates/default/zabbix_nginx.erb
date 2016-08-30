@@ -1,10 +1,25 @@
+<% if node['zabbix']['web']['ssl'] %>
 server {
+  listen         80;
+  server_name    "<%=@server_name%>";
+  return         301 https://$server_name;
+}
+<% end %>
 
+server {
   listen      <%= @web_port %>;
   index       index.php;
   root        <%= @web_dir %>;
   server_name "<%=@server_name%>";
-  
+
+<% if node['zabbix']['web']['ssl'] %>
+    ssl on;
+    ssl_certificate <%= node['zabbix']['web']['cert'] %>;
+    ssl_certificate_key <%= node['zabbix']['web']['key'] %>;
+    ssl_prefer_server_ciphers       on;
+    ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
+<% end %>
+
   access_log /var/log/nginx/zabbix.access.log;
 
   location ~ .*\.php$ {
