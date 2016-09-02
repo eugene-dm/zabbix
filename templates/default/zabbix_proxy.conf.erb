@@ -74,7 +74,7 @@ Hostname=<%= node['zabbix']['proxy']['hostname'] %>
 # Default:
 # LogFile=
 
-LogFile=/var/log/zabbix/zabbix_proxy.log
+LogFile=<%= node['zabbix']['proxy']['log_file']  %>
 
 ### Option: LogFileSize
 #	Maximum size of log file in MB.
@@ -103,7 +103,7 @@ LogFileSize=50
 #
 # Mandatory: no
 # Default:
-PidFile=/var/run/zabbix/zabbix_proxy.pid
+PidFile=<%= node['zabbix']['proxy']['pid_file'] %>
 
 ### Option: DBHost
 #	Database host name.
@@ -221,6 +221,7 @@ ConfigFrequency=<%= node['zabbix']['proxy']['config']['ConfigFrequency'] %>
 # Range: 0-1000
 # Default:
 # StartPollers=5
+StartPollers=<%= node['zabbix']['proxy']['start_pollers']%>
 
 ### Option: StartIPMIPollers
 #	Number of pre-forked instances of IPMI pollers.
@@ -237,6 +238,7 @@ ConfigFrequency=<%= node['zabbix']['proxy']['config']['ConfigFrequency'] %>
 # Range: 0-1000
 # Default:
 # StartPollersUnreachable=1
+StartPollersUnreachable=<%= node['zabbix']['proxy']['StartPollersUnreachable']%>
 
 ### Option: StartTrappers
 #	Number of pre-forked instances of trappers.
@@ -280,6 +282,7 @@ StartPingers=<%= @start_pingers %>
 # Range: 1-24
 # Default:
 # HousekeepingFrequency=1
+HousekeepingFrequency=<%= node['zabbix']['proxy']['housekeeping_frequency']%>
 
 ### Option: CacheSize
 #	Size of configuration cache, in bytes.
@@ -366,6 +369,7 @@ Timeout=<%= node['zabbix']['proxy']['timeout']%>
 # Mandatory: no
 # Default:
 # ExternalScripts=/etc/zabbix/externalscripts
+ExternalScripts=<%= node['zabbix']['proxy']['externalscriptspath'] %>
 
 ### Option: FpingLocation
 #	Location of fping.
@@ -400,6 +404,7 @@ Timeout=<%= node['zabbix']['proxy']['timeout']%>
 # Range: 1-3600000
 # Default:
 # LogSlowQueries=0
+LogSlowQueries=<%= node['zabbix']['proxy']['log_queries'] %>
 
 ### Option: TmpDir
 #	Temporary directory.
