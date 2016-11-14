@@ -67,6 +67,7 @@ CacheSize=<%= node['zabbix']['server']['cache_size'] %>
 JavaGateway=<%= @java_gateway %>
 JavaGatewayPort=<%= @java_gateway_port %>
 StartJavaPollers=<%= @java_pollers %>
+StartDiscoverers=<%= node['zabbix']['server']['start_discoverers']%>
 
 StartPollers=<%= node['zabbix']['server']['start_pollers']%>
 StartPollersUnreachable=<%= node['zabbix']['server']['StartPollersUnreachable']%>
