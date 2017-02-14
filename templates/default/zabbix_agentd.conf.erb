@@ -24,3 +24,42 @@ StartAgents=<%= node['zabbix']['agent']['start_agents'] %>
 <% end -%>
 ListenPort=<%=node['zabbix']['agent']['listen_port'] %>
 Timeout=<%= node['zabbix']['agent']['timeout'] %>
+<% if node['zabbix']['agent']['allow_root'] -%>
+AllowRoot=<%= node['zabbix']['agent']['allow_root'] %>
+<% end -%>
+<% if node['zabbix']['agent']['alias'] -%>
+Alias=<%= node['zabbix']['agent']['alias'] %>
+<% end -%>
+<% if node['zabbix']['agent']['debug_level'] -%>
+DebugLevel=<%= node['zabbix']['agent']['debug_level'] %>
+<% end -%>
+<% if node['zabbix']['agent']['disable_active'] -%>
+DisableActive=<%= node['zabbix']['agent']['disable_active'] %>
+<% end -%>
+<% if node['zabbix']['agent']['disable_passive'] -%>
+DisablePassive=<%= node['zabbix']['agent']['disable_passive'] %>
+<% end -%>
+<% if node['zabbix']['agent']['hostname_item'] -%>
+HostnameItem=<%= node['zabbix']['agent']['hostname_item'] %>
+<% end -%>
+<% if node['zabbix']['agent']['listen_ip'] -%>
+ListenIP=<%= node['zabbix']['agent']['listen_ip'] %>
+<% end -%>
+<% if node['zabbix']['agent']['log_file_size'] -%>
+LogFileSize=<%= node['zabbix']['agent']['log_file_size'] %>
+<% end -%>
+<% if node['zabbix']['agent']['log_file'] -%>
+LogFile=<%= node['zabbix']['agent']['log_file'] %>
+<% end -%>
+<% if node['zabbix']['agent']['max_lines_per_second'] -%>
+MaxLinesPerSecond=<%= node['zabbix']['agent']['max_lines_per_second'] %>
+<% end -%>
+<% if node['zabbix']['agent']['refresh_active_checks'] -%>
+RefreshActiveChecks=<%= node['zabbix']['agent']['refresh_active_checks'] %>
+<% end -%>
+<% if node['zabbix']['agent']['source_ip'] -%>
+SourceIP=<%= node['zabbix']['agent']['source_ip'] %>
+<% end -%>
+<% if node['zabbix']['agent']['start_agents'] -%>
+StartAgents=<%= node['zabbix']['agent']['start_agents'] %>
+<% end -%>
