@@ -1,7 +1,7 @@
 # The first rule of this file is: Do not edit.
 # The second rule of this file is: Do not edit.
 # Created by chef
-<% if node['zabbix']['agent']['unsafe_user_parameters'] -%>
+<% if node['zabbix']['agent']['user_parameter'] -%>
 <% node['zabbix']['agent']['user_parameter'].each do |user_parameter| -%>
 UserParameter=<%= user_parameter %>
 <% end -%>

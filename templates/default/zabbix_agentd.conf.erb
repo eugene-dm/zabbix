@@ -30,9 +30,6 @@ AllowRoot=<%= node['zabbix']['agent']['allow_root'] %>
 <% if node['zabbix']['agent']['alias'] -%>
 Alias=<%= node['zabbix']['agent']['alias'] %>
 <% end -%>
-<% if node['zabbix']['agent']['debug_level'] -%>
-DebugLevel=<%= node['zabbix']['agent']['debug_level'] %>
-<% end -%>
 <% if node['zabbix']['agent']['disable_active'] -%>
 DisableActive=<%= node['zabbix']['agent']['disable_active'] %>
 <% end -%>
@@ -48,9 +45,6 @@ ListenIP=<%= node['zabbix']['agent']['listen_ip'] %>
 <% if node['zabbix']['agent']['log_file_size'] -%>
 LogFileSize=<%= node['zabbix']['agent']['log_file_size'] %>
 <% end -%>
-<% if node['zabbix']['agent']['log_file'] -%>
-LogFile=<%= node['zabbix']['agent']['log_file'] %>
-<% end -%>
 <% if node['zabbix']['agent']['max_lines_per_second'] -%>
 MaxLinesPerSecond=<%= node['zabbix']['agent']['max_lines_per_second'] %>
 <% end -%>
@@ -59,7 +53,4 @@ RefreshActiveChecks=<%= node['zabbix']['agent']['refresh_active_checks'] %>
 <% end -%>
 <% if node['zabbix']['agent']['source_ip'] -%>
 SourceIP=<%= node['zabbix']['agent']['source_ip'] %>
-<% end -%>
-<% if node['zabbix']['agent']['start_agents'] -%>
-StartAgents=<%= node['zabbix']['agent']['start_agents'] %>
 <% end -%>

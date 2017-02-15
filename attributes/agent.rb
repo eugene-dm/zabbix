@@ -51,14 +51,11 @@ default['zabbix']['agent']['unsafe_user_parameter'] = []
 
 default['zabbix']['agent']['allow_root']= nil
 default['zabbix']['agent']['alias']= nil
-default['zabbix']['agent']['debug_level']= nil
 default['zabbix']['agent']['disable_active']= nil
 default['zabbix']['agent']['disable_passive']= nil
 default['zabbix']['agent']['hostname_item']= nil
 default['zabbix']['agent']['listen_ip']= nil
 default['zabbix']['agent']['log_file_size']= nil
-default['zabbix']['agent']['log_file']= nil
 default['zabbix']['agent']['max_lines_per_second']= nil
 default['zabbix']['agent']['refresh_active_checks']= nil
 default['zabbix']['agent']['source_ip']= nil
-default['zabbix']['agent']['start_agents']= nil
