@@ -203,7 +203,7 @@ DBPort=<%= @dbport %>
 # ConfigFrequency=3600
 ConfigFrequency=<%= node['zabbix']['proxy']['config']['ConfigFrequency'] %>
 
-### Option: DataSenderFrequency
+### Option: HousekeepingFrequency
 #	Proxy will send collected data to the Server every N seconds.
 #	For a proxy in the passive mode this parameter will be ignored.
 #
@@ -211,6 +211,7 @@ ConfigFrequency=<%= node['zabbix']['proxy']['config']['ConfigFrequency'] %>
 # Range: 1-3600
 # Default:
 # DataSenderFrequency=1
+DataSenderFrequency=<%= node['zabbix']['proxy']['data_sender_frequency']%>
 
 ############ ADVANCED PARAMETERS ################
 

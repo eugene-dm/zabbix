@@ -16,3 +16,4 @@ default['zabbix']['proxy']['log_file'] = '/var/log/zabbix/zabbix_proxy.log'
 default['zabbix']['proxy']['externalscriptspath'] = '/etc/zabbix/externalscripts'
 default['zabbix']['proxy']['pid_file'] = '/var/run/zabbix/zabbix_proxy.pid'
 default['zabbix']['proxy']['start_discoverers'] = 1
+default['zabbix']['proxy']['data_sender_frequency'] = 1
