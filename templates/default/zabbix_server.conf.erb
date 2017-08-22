@@ -69,6 +69,7 @@ JavaGatewayPort=<%= @java_gateway_port %>
 StartJavaPollers=<%= @java_pollers %>
 StartDiscoverers=<%= node['zabbix']['server']['start_discoverers']%>
 
+StartProxyPollers=<%= node['zabbix']['server']['start_proxy_pollers']%>
 StartPollers=<%= node['zabbix']['server']['start_pollers']%>
 StartPollersUnreachable=<%= node['zabbix']['server']['StartPollersUnreachable']%>
 Include=<%= node['zabbix']['server']['include_dir'] %>
