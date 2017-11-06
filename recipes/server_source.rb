@@ -55,6 +55,7 @@ when 'redhat', 'centos', 'scientific', 'amazon', 'oracle'
     php_packages = %w(php-pear php-devel)
     packages.push(*php_packages)
   end
+  packages.push('php-ldap')
   init_template = 'zabbix_server.init-rh.erb'
 end
 
