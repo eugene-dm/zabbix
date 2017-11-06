@@ -65,7 +65,7 @@ template '/etc/nginx/sites-available/zabbix' do
     :web_port => node['zabbix']['web']['port'],
     :web_dir => node['zabbix']['web_dir'],
     :fastcgi_listen => node['zabbix']['web']['php']['fastcgi_listen'],
-    :ssl_protocols = node['zabbix']['web']['ssl_protocols']
+    :ssl_protocols => node['zabbix']['web']['ssl_protocols']
   )
   notifies :reload, 'service[nginx]'
 end
