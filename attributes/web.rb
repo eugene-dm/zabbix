@@ -27,3 +27,5 @@ default['zabbix']['web']['packages'] = value_for_platform_family(
       %w(php php-mysql php-gd php-bcmath php-mbstring php-xml)
     end
   )
+
+default['zabbix']['web']['ssl_protocols'] = 'TLSv1 TLSv1.1 TLSv1.2'

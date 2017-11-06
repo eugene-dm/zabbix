@@ -58,12 +58,29 @@ when 'redhat', 'centos', 'scientific', 'amazon', 'oracle'
   init_template = 'zabbix_server.init-rh.erb'
 end
 
+packages = zabbix_php_packages(packages)
+
+if node['zabbix']['server']['php']['version'] != 'default'
+  case node['platform']
+    when 'redhat', 'centos', 'scientific', 'amazon', 'oracle'
+      node.default['php-fpm']['package_name'] = "php#{node['zabbix']['server']['php']['version']}-php-fpm"
+  end
+end
+
 packages.each do |pck|
   package pck do
     action :install
   end
 end
 
+if node['zabbix']['server']['php']['version'] != 'default'
+  case node['platform']
+    when 'redhat', 'centos', 'scientific', 'amazon', 'oracle'
+      link "/bin/php" do
+        to "/bin/php#{node['zabbix']['server']['php']['version']}"
+      end
+  end
+end
 # Install the oci8 pecl - common to both Debian and RHEL families
 php_pear 'oci8' do
   preferred_state 'stable'

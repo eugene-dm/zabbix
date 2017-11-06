@@ -61,6 +61,7 @@ when 'redhat', 'centos', 'scientific', 'amazon', 'oracle'
   init_template = 'zabbix_proxy.init-rh.erb'
 
 end
+packages = zabbix_php_packages(packages)
 
 packages.each do |pck|
   package pck do

@@ -8,7 +8,9 @@ include_recipe 'nginx'
 # Install php-fpm to execute PHP code from nginx
 include_recipe 'php-fpm'
 
-node['zabbix']['web']['packages'].each do |pck|
+packages = zabbix_php_packages(node['zabbix']['web']['packages'])
+
+packages.each do |pck|
   package pck do
     notifies :restart, 'service[nginx]'
   end
@@ -62,7 +64,8 @@ template '/etc/nginx/sites-available/zabbix' do
     :php_settings => node['zabbix']['web']['php']['settings'],
     :web_port => node['zabbix']['web']['port'],
     :web_dir => node['zabbix']['web_dir'],
-    :fastcgi_listen => node['zabbix']['web']['php']['fastcgi_listen']
+    :fastcgi_listen => node['zabbix']['web']['php']['fastcgi_listen'],
+    :ssl_protocols = node['zabbix']['web']['ssl_protocols']
   )
   notifies :reload, 'service[nginx]'
 end

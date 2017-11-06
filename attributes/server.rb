@@ -35,3 +35,6 @@ default['zabbix']['server']['pid_file']       =   "/var/run/zabbix/zabbix_server
 default['zabbix']['server']['time_zone']      =   "Europe/London"
 
 default['zabbix']['server']['additional_parameters'] = {}
+
+
+default['zabbix']['server']['php']['version'] = 'default'

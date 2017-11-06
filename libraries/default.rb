@@ -1,11 +1,6 @@
 class Chef
-  module Zabbix
-    class << self
-      def default_download_url(branch, version)
-        "http://downloads.sourceforge.net/project/zabbix/#{branch}/#{version}/zabbix-#{version}.tar.gz"
-      end
-
-      def php_packages(packages)
+  class Recipe
+      def zabbix_php_packages(packages)
         if node['zabbix']['server']['php']['version'] != 'default'
           case node['platform']
             when 'redhat', 'centos', 'scientific', 'amazon', 'oracle'
@@ -13,6 +8,5 @@ class Chef
           end
         end
       end
-    end
   end
 end
