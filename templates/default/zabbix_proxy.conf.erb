@@ -428,3 +428,7 @@ StartJavaPollers=<%= @java_pollers %>
 
 # Include=/etc/zabbix/zabbix_proxy.general.conf
 # Include=/etc/zabbix/zabbix_proxy/
+
+<% node['zabbix']['proxy']['additional_parameters'].each do |key, value| -%>
+<%= key %>=<%= value %>
+<% end -%>
