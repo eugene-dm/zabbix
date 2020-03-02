@@ -65,4 +65,5 @@ zabbix_database node['zabbix']['database']['dbname'] do
   install_dir node['zabbix']['install_dir']
   branch node['zabbix']['server']['branch']
   version node['zabbix']['server']['version']
+  action :create
 end

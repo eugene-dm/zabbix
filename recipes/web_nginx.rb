@@ -3,7 +3,15 @@ include_recipe 'zabbix::common'
 # Install nginx and disable default site
 node.override['nginx']['default_site_enabled'] = false
 # node.override['php-fpm']['pool']['www']['listen'] = node['zabbix']['web']['php']['fastcgi_listen']
-include_recipe 'nginx'
+#include_recipe 'nginx'
+nginx_install 'distro' do
+  default_site_enabled false
+  action :install
+end
+
+service 'nginx' do
+  action   [:start, :disable]
+end
 
 # Install php-fpm to execute PHP code from nginx
 include_recipe 'php-fpm'

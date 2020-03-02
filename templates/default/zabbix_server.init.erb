@@ -5,10 +5,10 @@
 # Written by Alexei Vladishev <alexei.vladishev@zabbix.com>.
 
 NAME=zabbix_server
-DAEMON=<%= node.zabbix.install_dir %>/sbin/${NAME}
+DAEMON=<%= node['zabbix']['install_dir'] %>/sbin/${NAME}
 DESC="Zabbix server daemon"
-DIR=<%= node.zabbix.run_dir %>
-PID=<%= node.zabbix.run_dir %>/$NAME.pid
+DIR=<%= node['zabbix']['run_dir'] %>
+PID=<%= node['zabbix']['run_dir'] %>/$NAME.pid
 
 . /lib/lsb/init-functions
 
@@ -21,7 +21,7 @@ case "$1" in
   start)
         echo "Starting $DESC: $NAME"
         start-stop-daemon --oknodo --start --pidfile $PID \
-                --exec $DAEMON -- -c <%= node.zabbix.etc_dir %>/zabbix_server.conf
+                --exec $DAEMON -- -c <%= node['zabbix']['etc_dir'] %>/zabbix_server.conf
         ;;
   stop)
         echo "Stopping $DESC: $NAME"

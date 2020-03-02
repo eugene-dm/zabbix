@@ -22,10 +22,10 @@
 . /lib/lsb/init-functions
 
 NAME=zabbix_proxy
-PATH=/bin:/usr/bin:/sbin:/usr/sbin:<%= node.zabbix.install_dir %>/sbin
+PATH=/bin:/usr/bin:/sbin:/usr/sbin:<%= node['zabbix']['install_dir'] %>/sbin
 DESC="Zabbix proxy daemon"
 
-if [ -x <%= node.zabbix.install_dir %>/sbin/zabbix_proxy ]; then
+if [ -x <%= node['zabbix']['install_dir'] %>/sbin/zabbix_proxy ]; then
     exec=zabbix_proxy
 else
     exit 5
@@ -33,7 +33,7 @@ fi
 
 
 prog=${exec##*/}
-conf=<%= node.zabbix.etc_dir %>/zabbix_proxy.conf
+conf=<%= node['zabbix']['etc_dir'] %>/zabbix_proxy.conf
 pidfile=$(grep -e "^PidFile=.*$" $conf | cut -d= -f2 | tr -d '\r')
 timeout=10
 

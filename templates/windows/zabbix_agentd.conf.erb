@@ -4,7 +4,7 @@ Hostname=<%= node['zabbix']['agent']['hostname'] %>
 <% ::Dir.foreach(node['zabbix']['agent']['include_dir']).sort.drop(2) do |dir| -%>
 Include=<%= dir %>
 <% end -%>
-Server=<%= node.zabbix.agent.servers.join(',') %>
+Server=<%= node['zabbix']['agent']['servers'].join(',') %>
 <% if node['zabbix']['agent']['log_file'] -%>
 LogFile=<%= node['zabbix']['agent']['log_file'] %>
 <% end -%>
@@ -18,8 +18,8 @@ LogRemoteCommands=1
 <% if node['zabbix']['agent']['pid_file'] -%>
 PidFile=<%= node['zabbix']['agent']['pid_file'] %>
 <% end -%>
-<% if node.zabbix.agent.servers_active.first -%>
-ServerActive=<%= node.zabbix.agent.servers_active.join(',') %>
+<% if node['zabbix']['agent']['servers_active'].first -%>
+ServerActive=<%= node['zabbix']['agent']['servers_active'].join(',') %>
 <% end -%>
 <% if node['zabbix']['agent']['start_agents'] -%>
 StartAgents=<%= node['zabbix']['agent']['start_agents'] %>

@@ -24,7 +24,7 @@ LISTEN_PORT=10052
 # Default:
 # PID_FILE=
 
-PID_FILE="<%= node.zabbix.run_dir %>/zabbix_java_proxy.pid"
+PID_FILE="<%= node['zabbix']['run_dir'] %>/zabbix_java_proxy.pid"
 
 ### Option: zabbix.startPollers
 #       Number of worker threads to start.

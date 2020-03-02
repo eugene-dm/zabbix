@@ -1,25 +1,25 @@
-actions :create
+#actions :create
 default_action :create
+provides :zabbix_database
+#attr_accessor :exists
 
-attr_accessor :exists
+#def initialize(name, run_context = nil)
+#  super
+#  @provider ||= Chef::Provider::ZabbixDatabaseMySql
+#end
 
-def initialize(name, run_context = nil)
-  super
-  @provider ||= Chef::Provider::ZabbixDatabaseMySql
-end
+property :dbname, String, :name_property => true
+property :host, String, :required => true
+property :port, Integer, :required => true
+property :username, String, :required => true
+property :password, String, :required => true
+property :root_username, String, :required => true
+property :root_password, String, :required => true
+property :allowed_user_hosts, String, :default => ''
 
-attribute :dbname, :kind_of => String, :name_attribute => true
-attribute :host, :kind_of => String, :required => true
-attribute :port, :kind_of => Integer, :required => true
-attribute :username, :kind_of => String, :required => true
-attribute :password, :kind_of => String, :required => true
-attribute :root_username, :kind_of => String, :required => true
-attribute :root_password, :kind_of => String, :required => true
-attribute :allowed_user_hosts, :kind_of => String, :default => ''
-
-attribute :server_version, :kind_of => String, :required => true
-attribute :source_url, :kind_of => String, :required => true
-attribute :source_dir, :kind_of => String, :required => true
-attribute :install_dir, :kind_of => String, :required => true
-attribute :branch, :kind_of => String, :required => false
-attribute :version, :kind_of => String, :required => false
+property :server_version, String, :required => true
+property :source_url, String, :required => true
+property :source_dir, String, :required => true
+property :install_dir, String, :required => true
+property :branch, String, :required => false
+property :version, String, :required => false

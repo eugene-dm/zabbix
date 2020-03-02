@@ -21,13 +21,13 @@
 . /lib/lsb/init-functions
 
 NAME=zabbix_server
-PATH=/bin:/usr/bin:/sbin:/usr/sbin:<%= node.zabbix.install_dir %>/sbin
-DAEMON=<%= node.zabbix.install_dir %>/sbin/${NAME}
-OPTS="-c <%= node.zabbix.etc_dir %>/zabbix_server.conf"
+PATH=/bin:/usr/bin:/sbin:/usr/sbin:<%= node['zabbix']['install_dir'] %>/sbin
+DAEMON=<%= node['zabbix']['install_dir'] %>/sbin/${NAME}
+OPTS="-c <%= node['zabbix']['etc_dir'] %>/zabbix_server.conf"
 DESC="Zabbix server daemon"
-DIR=<%= node.zabbix.run_dir %>
-PID=<%= node.zabbix.run_dir %>/$NAME.pid
-LOCK=<%= node.zabbix.lock_dir %>/$NAME
+DIR=<%= node['zabbix']['run_dir'] %>
+PID=<%= node['zabbix']['run_dir'] %>/$NAME.pid
+LOCK=<%= node['zabbix']['lock_dir'] %>/$NAME
 
 # Exit if the package is not installed
 if [ ! -x "$DAEMON" ]; then
